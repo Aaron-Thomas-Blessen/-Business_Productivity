@@ -136,12 +136,7 @@ const SpeechTranscriber = () => {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="mt-12 py-6 bg-[#161616] text-white text-sm">
-        <div className="container mx-auto px-6">
-          Powered by IBM Watson Speech Services
-        </div>
-      </footer>
+   
     </div>
   );
 };
