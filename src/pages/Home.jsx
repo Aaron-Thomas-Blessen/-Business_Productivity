@@ -7,6 +7,14 @@ const Home = () => {
     window.location.href = 'http://localhost:8501/';
   };
 
+  const redirectToOptimize = () => {
+    window.location.href = 'http://localhost:8501/';
+  };
+
+  const redirectToRelations = () => {
+    window.location.href = 'http://localhost:8501/';
+  };
+
   const redirectToKnowledge = () => {
     window.location.href = 'http://localhost:8501/';
   };
@@ -24,6 +32,18 @@ const Home = () => {
         className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
       >
         Automate Meeting Insights
+      </button>
+      <button
+        onClick={redirectToOptimize}
+        className="px-6 py-3 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors"
+      >
+        Workforce Productivity
+      </button>
+      <button
+        onClick={redirectToRelations}
+        className="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+      >
+        Customer Relations
       </button>
       <button
         onClick={redirectToKnowledge}
