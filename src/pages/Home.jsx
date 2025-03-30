@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { IconMicrophone, IconMail, IconUsers, IconBriefcase, IconBook, IconMessageCircle } from '@tabler/icons-react';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -24,45 +25,86 @@ const Home = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 space-y-4">
-      <button
-        onClick={() => navigate('/speech')}
-        className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-      >
-        AI Voice to Text
-      </button>
-      <button
-        onClick={redirectToStreamlit}
-        className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
-      >
-        Automate Meeting Insights
-      </button>
-      <button
-        onClick={redirectToOptimize}
-        className="px-6 py-3 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors"
-      >
-        Workforce Productivity
-      </button>
-      <button
-        onClick={redirectToRelations}
-        className="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
-      >
-        Customer Relations
-      </button>
-      <button
-        onClick={redirectToKnowledge}
-        className="px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
-      >
-        Company Knowledge Base
-      </button>
-      <button
-        onClick={redirectToEmail}
-        className="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
-      >
-        Email Management
-      </button>
+    <div className="min-h-screen bg-[#f4f4f4]">
+      {/* IBM-style header */}
+      <header className="bg-black py-4">
+        <div className="container mx-auto px-6">
+          <h1 className="text-white text-2xl font-bold">IBM Enterprise Assistant</h1>
+        </div>
+      </header>
+
+      {/* Main content */}
+      <main className="container mx-auto px-6 py-12">
+        <h2 className="text-[#161616] text-3xl font-light mb-8">Enterprise Solutions</h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Card 
+            icon={<IconMicrophone className="w-8 h-8" />}
+            title="AI Voice to Text"
+            description="Convert speech to text with advanced AI processing"
+            onClick={() => navigate('/speech')}
+            color="bg-[#4589ff]"
+          />
+          <Card 
+            icon={<IconMessageCircle className="w-8 h-8" />}
+            title="Meeting Insights"
+            description="Automate meeting summaries and action items"
+            onClick={redirectToStreamlit}
+            color="bg-[#08bdba]"
+          />
+          <Card 
+            icon={<IconBriefcase className="w-8 h-8" />}
+            title="Workforce Productivity"
+            description="Optimize team performance and workflow"
+            onClick={redirectToOptimize}
+            color="bg-[#ff7eb6]"
+          />
+          <Card 
+            icon={<IconUsers className="w-8 h-8" />}
+            title="Customer Relations"
+            description="Enhance customer engagement and support"
+            onClick={redirectToRelations}
+            color="bg-[#d4bbff]"
+          />
+          <Card 
+            icon={<IconBook className="w-8 h-8" />}
+            title="Knowledge Base"
+            description="Access company information efficiently"
+            onClick={redirectToKnowledge}
+            color="bg-[#3ddbd9]"
+          />
+          <Card 
+            icon={<IconMail className="w-8 h-8" />}
+            title="Email Management"
+            description="Intelligent email handling and response"
+            onClick={redirectToEmail}
+            color="bg-[#be95ff]"
+          />
+        </div>
+      </main>
+
+      {/* IBM-style footer */}
+      <footer className="bg-[#161616] py-6 mt-12">
+        <div className="container mx-auto px-6 text-white text-sm">
+          © IBM Corp. 2024
+        </div>
+      </footer>
     </div>
   );
 };
+
+// Card component for consistent styling
+const Card = ({ icon, title, description, onClick, color }) => (
+  <button
+    onClick={onClick}
+    className="flex flex-col items-start p-6 rounded-lg bg-white border border-gray-200 hover:border-[#4589ff] transition-all duration-200 shadow-sm hover:shadow-md w-full text-left"
+  >
+    <div className={`${color} p-3 rounded-lg text-white mb-4`}>
+      {icon}
+    </div>
+    <h3 className="text-[#161616] text-xl font-semibold mb-2">{title}</h3>
+    <p className="text-[#525252] text-sm">{description}</p>
+  </button>
+);
 
 export default Home;
