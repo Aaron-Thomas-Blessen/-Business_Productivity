@@ -83,12 +83,7 @@ const Home = () => {
         </div>
       </main>
 
-      {/* IBM-style footer */}
-      <footer className="bg-[#161616] py-6 mt-12">
-        <div className="container mx-auto px-6 text-white text-sm">
-          © IBM Corp. 2024
-        </div>
-      </footer>
+    
     </div>
   );
 };
