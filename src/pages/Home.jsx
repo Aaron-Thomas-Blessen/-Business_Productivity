@@ -3,13 +3,33 @@ import { useNavigate } from "react-router-dom";
 const Home = () => {
   const navigate = useNavigate();
 
+  const redirectToStreamlit = () => {
+    window.location.href = 'http://localhost:8501/';
+  };
+
+  const redirectToKnowledge = () => {
+    window.location.href = 'http://localhost:8501/';
+  };
+
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 space-y-4">
       <button
         onClick={() => navigate('/speech')}
         className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
       >
         AI Voice to Text
+      </button>
+      <button
+        onClick={redirectToStreamlit}
+        className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+      >
+        Automate Meeting Insights
+      </button>
+      <button
+        onClick={redirectToKnowledge}
+        className="px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+      >
+        Company Knowledge Base
       </button>
     </div>
   );
