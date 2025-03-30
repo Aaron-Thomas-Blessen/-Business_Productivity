@@ -1,50 +1,96 @@
-import { useState, useEffect } from 'react';
-import { generateText } from '../components/generateText';
+import { useState, useRef } from "react";
 
-const Home = () => {
-  const [summary, setSummary] = useState('');
-  const [loading, setLoading] = useState(false);
+const SpeechTranscriber = () => {
+  const [text, setText] = useState("Click 'Start' to transcribe...");
+  const [isListening, setIsListening] = useState(false);
   const [error, setError] = useState(null);
+  const recognitionRef = useRef(null);
 
-  const fetchSummary = async () => {
+  const stopListening = () => {
+    if (recognitionRef.current) {
+      recognitionRef.current.stop();
+      setIsListening(false);
+    }
+  };
+
+  const startListening = () => {
+    if (!('webkitSpeechRecognition' in window)) {
+      setError('Speech recognition is not supported in this browser');
+      return;
+    }
+
+    setError(null);
+    const recognition = new window.webkitSpeechRecognition();
+    recognitionRef.current = recognition;
+    
+    recognition.continuous = true;
+    recognition.interimResults = true;
+    recognition.lang = "en-US";
+
+    recognition.onresult = (event) => {
+      const transcript = Array.from(event.results)
+        .map((result) => result[0].transcript)
+        .join("");
+      setText(transcript);
+    };
+
+    recognition.onerror = (event) => {
+      if (event.error === 'network') {
+        setError('Network error. Please check your internet connection.');
+      } else {
+        setError(`Error: ${event.error}`);
+      }
+      setIsListening(false);
+    };
+
+    recognition.onend = () => {
+      setIsListening(false);
+    };
+
     try {
-      setLoading(true);
-      setError(null);
-      const response = await generateText();
-      setSummary(response.results[0].generated_text);
+      recognition.start();
+      setIsListening(true);
     } catch (err) {
-      setError('Failed to generate summary. Please try again.');
-      console.error('Error:', err);
-    } finally {
-      setLoading(false);
+      setError(`Failed to start: ${err.message}`);
+      setIsListening(false);
     }
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Meeting Summary Generator</h1>
-      
-      <button 
-        onClick={fetchSummary}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4"
-        disabled={loading}
-      >
-        {loading ? 'Generating...' : 'Generate Summary'}
-      </button>
-
+    <div className="p-4">
+      <h2 className="text-xl font-bold mb-4">AI Speech Transcriber</h2>
+      <div className="space-x-2">
+        <button 
+          onClick={startListening} 
+          disabled={isListening} 
+          className={`p-2 rounded ${isListening ? 'bg-gray-500' : 'bg-green-500'} text-white`}
+        >
+          {isListening ? "Listening..." : "Start Transcription"}
+        </button>
+        <button 
+          onClick={stopListening}
+          disabled={!isListening}
+          className={`p-2 rounded ${!isListening ? 'bg-gray-500' : 'bg-red-500'} text-white`}
+        >
+          Stop
+        </button>
+      </div>
       {error && (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+        <div className="mt-2 p-2 bg-red-100 border border-red-400 text-red-700 rounded">
           {error}
+          {error.includes('network') && (
+            <p className="text-sm mt-1">
+              Try: 
+              1. Checking your internet connection
+              2. Refreshing the page
+              3. Using a different browser (Chrome recommended)
+            </p>
+          )}
         </div>
       )}
-
-      {summary && (
-        <div className="bg-white shadow-md rounded px-8 py-6">
-          <div dangerouslySetInnerHTML={{ __html: summary }} />
-        </div>
-      )}
+      <p className="mt-4 p-2 border rounded bg-white min-h-[100px]">{text}</p>
     </div>
   );
 };
 
-export default Home;
+export default SpeechTranscriber;
