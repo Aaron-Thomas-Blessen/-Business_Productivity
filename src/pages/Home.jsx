@@ -19,6 +19,10 @@ const Home = () => {
     window.location.href = 'http://localhost:8501/';
   };
 
+  const redirectToEmail = () => {
+    window.location.href = 'http://localhost:8501/';
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 space-y-4">
       <button
@@ -50,6 +54,12 @@ const Home = () => {
         className="px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
       >
         Company Knowledge Base
+      </button>
+      <button
+        onClick={redirectToEmail}
+        className="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+      >
+        Email Management
       </button>
     </div>
   );
