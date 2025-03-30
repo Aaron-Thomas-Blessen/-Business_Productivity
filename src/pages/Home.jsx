@@ -9,19 +9,19 @@ const Home = () => {
   };
 
   const redirectToOptimize = () => {
-    window.location.href = 'http://localhost:8501/';
+    window.location.href = 'http://localhost:8504/';
   };
 
   const redirectToRelations = () => {
-    window.location.href = 'http://localhost:8501/';
+    window.location.href = 'http://localhost:8505/';
   };
 
   const redirectToKnowledge = () => {
-    window.location.href = 'http://localhost:8501/';
+    window.location.href = 'http://localhost:8503/';
   };
 
   const redirectToEmail = () => {
-    window.location.href = 'http://localhost:8501/';
+    window.location.href = 'http://localhost:8502/';
   };
 
   return (
@@ -29,7 +29,7 @@ const Home = () => {
       {/* IBM-style header */}
       <header className="bg-black py-4">
         <div className="container mx-auto px-6">
-          <h1 className="text-white text-2xl font-bold">IBM Enterprise Assistant</h1>
+          <h1 className="text-white text-2xl font-bold">IBM WatsonX AI Suite</h1>
         </div>
       </header>
 
